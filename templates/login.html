@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+  <title>Login</title>
+</head>
+
+<body>
+    <div>
+        <form method = "post">
+            <div>
+                <input type = "text" placeholder = "Usuario" value = {{request.form.usuario}} name = "usuario">
+
+                <input type = "text" placeholder = "Senha" value = {{request.form.senha}} name = "senha">
+
+                <div>
+                    {% if error %}
+                        <p color = "red">{{error}}</p>
+                    {% endif %}
+                </div>
+
+                <button type="submit">Entrar</button>
+
+            </div>
+        </form>
+    </div>
+
+</body>

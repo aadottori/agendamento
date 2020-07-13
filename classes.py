@@ -7,6 +7,7 @@ class Usuario():
         self.id = str(id)
 
         dados = controller.select_CursorDict('*', 'table_usuarios', f'id="{self.id}"')[0]
+        self.username = dados['username']
         self.nome = dados['nome']
         self.cpf = dados['cpf']
         self.telefone = dados['telefone']

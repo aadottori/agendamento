@@ -3,9 +3,9 @@ import mysql.connector
 from flask import render_template, make_response
 import pdfkit
 from datetime import date, datetime, timedelta
-import validador
-import formatter
 from classes import *
+import pandas as pd
+import csv
 
 config = {
   'user': 'root',
@@ -175,8 +175,39 @@ def select_CursorDict(fields, tables, where = None):
 
 #==Funções derivadas==#
 
-def verifica_usuario(cpf):
+def verifica_usuario(usuario):
     """retorna True se o usuario já está cadastrado e False c.c."""
     usuario = "usuario="+str(usuario)
     return bool(len(select("usuario", "table_usuarios", usuario)))
 
+
+def bd_usuarios():
+    with open("/database/table_usuarios.csv", newline="") as f:
+        return list(csv.reader(f))
+        
+
+def verifica_usuario_csv(usuario):
+    lista_usuarios = bd_usuarios()
+    for item_usuario in lista_usuarios:
+        if item_usuario[1] == usuario:
+            return True
+    return False
+
+
+def usuario_id(usuario):
+    lista_usuarios = bd_usuarios()
+    for item_usuario in lista_usuarios:
+        if item_usuario[1] == usuario:
+            return item_usuario[0]
+    return 0
+
+
+def adicionar_linha(arquivo, linha):
+    with open(arquivo, "a") as f:
+        f.write(linha)
+        f.write("\n")
+
+
+def numero_linhas_csv(arquivo):
+    with open(arquivo, newline="") as f:
+        return sum(1 for row in csv.reader(f))

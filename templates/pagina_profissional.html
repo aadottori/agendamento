@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+  <title>Página Profissional</title>
+</head>
+
+<body>
+    <div>
+        <form method = "post">
+            <div>
+                <input type = "text" placeholder = "Data" value = {{request.form.data}} name = "data">
+
+                <input type = "text" placeholder = "Hora" value = {{request.form.hora}} name = "hora">
+
+                <div>
+                    {% if error %}
+                        <p color = "red"> {{error}} </p>
+                    {% endif %}
+                </div>
+                
+                <button type="submit">Cadastrar</button>
+            
+            </div>
+        </form>
+    </div>
+
+</body>
